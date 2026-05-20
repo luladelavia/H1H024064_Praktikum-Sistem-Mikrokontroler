@@ -90,7 +90,7 @@ void loop()
 
 ---
 
-## 2.6 Tugas Praktikum 2: Up/Down Counter Manual
+## Tugas Praktikum 2: Up/Down Counter Manual
 
 ### 1. Skematik Rangkaian
 
@@ -180,7 +180,7 @@ void loop() {
 
 ---
 
-## 2.7 Analisis & Prinsip Kerja
+## Analisis & Prinsip Kerja
 
 ### 1. Resume Hasil Percobaan
 
