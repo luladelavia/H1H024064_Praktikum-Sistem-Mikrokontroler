@@ -1,15 +1,14 @@
+# Laporan Praktikum - Jawaban Pertanyaan
 
-```markdown
-# Laporan Praktikum Mikrokomputer: Seven Segment & Push Button
+* **Nama:** Lula Khaisha Delavia
+* **NIM:** H1H024064
+* **Shift Awal:** D
+* **Shift Akhir:** D
 
-* **Nama** : Lula Khaisha Delavia
-* **NIM** : H1H024064  
-* **Shift Awal** : D  
-* **Shift Akhir** : D 
 
 ---
 
-## 2.5 Tugas Praktikum 1: Seven Segment Otomatis (F ke 0)
+## Tugas Praktikum 1: Seven Segment Otomatis (F ke 0)
 
 ### 1. Skematik Rangkaian
 ![Schematic](https://github.com/user-attachments/assets/5364bd69-553a-42a6-8993-76464487624b)
