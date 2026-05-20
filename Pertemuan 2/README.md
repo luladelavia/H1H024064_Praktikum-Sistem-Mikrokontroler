@@ -195,7 +195,3 @@ Display tersusun dari 7 LED batang (a-g) dan 1 LED titik (dp). Karakter terbentu
 
 * **Sistem Otomatis (2A):** Mengandalkan struktur internal perulangan `for` bawaan kode yang berjalan sequensial dari batas bawah ke batas atas (atau sebaliknya) terikat interupsi waktu via `delay()`.
 * **Sistem Manual (2B):** Logika bertumpu pada pendeteksian pulsa turun sinyal (*falling edge* dari HIGH ke LOW) saat tombol dipencet. Begitu pemicu terbaca, variabel dinamis `currentDigit` dimodifikasi (`++` atau `--`) dengan proteksi sirkular (*wrap-around* batas nilai 0 dan 15) sebelum dilempar kembali ke fungsi display.
-
-```
-
-```
