@@ -1,7 +1,7 @@
 # Laporan Praktikum - Jawaban Pertanyaan
 
 * **Nama:** Lula Khaisha Delavia
-* **NIM:** H1H024048
+* **NIM:** H1H024064
 * **Shift Awal:** D
 * **Shift Akhir:** D
 
