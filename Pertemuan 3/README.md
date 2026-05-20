@@ -13,7 +13,7 @@ Dokumen ini berisi dokumentasi, analisis, dan modifikasi kode untuk Percobaan 3A
 
 ---
 
-## 3.5.4 Percobaan 3A: Komunikasi Serial (UART)
+## 3.5 Percobaan 3A: Komunikasi Serial (UART)
 
 ### 1. Alur Proses: Input Keyboard hingga Modifikasi Status LED
 Proses transfer data dan eksekusi perintah berjalan melalui tahapan berikut:
@@ -99,7 +99,7 @@ void loop() {
 
 > Pada modifikasi ini digunakan millis(), bukan delay(). Alasannya dikarenakan sistem tesrebut bersifat non-blocking. Program tetap bisa membaca input serial sambil menghitung waktu yang berlalu. Setiap loop, program mengecek apakah sudah waktunya mengganti status LED tanpa menghentikan eksekusi. Sehingga menjadi lebih responsif terhadap input dari pengguna. Cocok untuk aplikasi yang memerlukan pemrosesan paralel seperti membaca sensor, menerima perintah, dan menggerakkan aktuator secara bersamaan.
 
-## 3.6.4 Percobaan 3B: Inter-Integrated Circuit (I2C)
+## 3.6 Percobaan 3B: Inter-Integrated Circuit (I2C)
 
 ### 1. Mekanisme Komunikasi Arduino ke LCD via Bus I2C
 Komunikasi ini memanfaatkan arsitektur sinkronos berbasis Master-Slave dengan detail sebagai berikut:
@@ -189,13 +189,3 @@ void loop() {
 | 49  | 0.24     | 4%         |
 | 74  | 0.36     | 7%         |
 | 96  | 0.47     | 9%         |
-
-# Dokumentasi
-
-1. Hasil Output Percobaan 3B (No.4)
-
-![ACD 1](Hasil_Dokumentasi_Percobaan_3B_(ACD=1).png)
-![ACD 21](Hasil_Dokumentasi_Percobaan_3B_(ACD=21).png)
-![ACD 49](Hasil_Dokumentasi_Percobaan_3B_(ACD=49).png)
-![ACD 74](Hasil_Dokumentasi_Percobaan_3B_(ACD=74).png)
-![ACD 96](Hasil_Dokumentasi_Percobaan_3B_(ACD=96).png)
