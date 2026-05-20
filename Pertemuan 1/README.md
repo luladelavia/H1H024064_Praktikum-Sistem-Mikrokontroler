@@ -2,8 +2,8 @@
 
 * **Nama:** Lula Khaisha Delavia
 * **NIM:** H1H024064
-* **Shift Awal:** D
-* **Shift Akhir:** D
+* **Shift Awal:**  D
+* **Shift Akhir:**  D
 
 
 ## 📌 Bagian 1: Analisis Percobaan 1A (LED Blink dengan Kecepatan Dinamis)
