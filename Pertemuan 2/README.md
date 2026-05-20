@@ -22,36 +22,68 @@ Menggunakan **Common Cathode**. Karena semua katoda LED terhubung ke *Ground* (G
 ### 4. Kode Program (Hitung Mundur F ke 0)
 ```cpp
 #include <Arduino.h>
-
-// Pemetaan pin Arduino ke segmen: {a, b, c, d, e, f, g, dp}
 const int segmentPins[8] = {7, 6, 5, 11, 10, 8, 9, 4};
 
-// Pola bit katoda untuk karakter 0–F (1 = ON, 0 = OFF)
+const int buttonPin = 3;
+
+int counter = 0;
+
+bool lastButtonState = HIGH;
+
 byte digitPattern[16][8] = {
-  {1,1,1,1,1,1,0,0}, {0,1,1,0,0,0,0,0}, {1,1,0,1,1,0,1,0}, {1,1,1,1,0,0,1,0}, // 0, 1, 2, 3
-  {0,1,1,0,0,1,1,0}, {1,0,1,1,0,1,1,0}, {1,0,1,1,1,1,1,0}, {1,1,1,0,0,0,0,0}, // 4, 5, 6, 7
-  {1,1,1,1,1,1,1,0}, {1,1,1,1,0,1,1,0}, {1,1,1,0,1,1,1,0}, {0,0,1,1,1,1,1,0}, // 8, 9, A, b
-  {1,0,0,1,1,1,0,0}, {0,1,1,1,1,0,1,0}, {1,0,0,1,1,1,1,0}, {1,0,0,0,1,1,1,0}  // C, d, E, F
+  {1,1,1,1,1,1,0,0}, //0
+  {0,1,1,0,0,0,0,0}, //1
+  {1,1,0,1,1,0,1,0}, //2
+  {1,1,1,1,0,0,1,0}, //3
+  {0,1,1,0,0,1,1,0}, //4
+  {1,0,1,1,0,1,1,0}, //5 
+  {1,0,1,1,1,1,1,0}, //6
+  {1,1,1,0,0,0,0,0}, //7
+  {1,1,1,1,1,1,1,0}, //8
+  {1,1,1,1,0,1,1,0}, //9
+  {1,1,1,0,1,1,1,0}, //A
+  {0,0,1,1,1,1,1,0}, //b
+  {1,0,0,1,1,1,0,0}, //C
+  {0,1,1,1,1,0,1,0}, //d
+  {1,0,0,1,1,1,1,0}, //E
+  {1,0,0,0,1,1,1,0}  //F
 };
 
-void displayDigit(int num) {
-  for (int i = 0; i < 8; i++) {
-    digitalWrite(segmentPins[i], digitPattern[num][i]);
+void displayDigit(int num)
+{
+  for(int i=0; i<8; i++)
+  {
+    digitalWrite(segmentPins[i], !digitPattern[num][i]);
   }
 }
 
-void setup() {
-  for (int i = 0; i < 8; i++) {
+void setup()
+{
+  for(int i=0; i<8; i++)
+  {
     pinMode(segmentPins[i], OUTPUT);
   }
+
+  pinMode(buttonPin, INPUT_PULLUP);
+
+  displayDigit(counter);
 }
 
-void loop() {
-  // Loop counter bergerak turun dari indeks 15 (F) ke 0
-  for (int i = 15; i >= 0; i--) {
-    displayDigit(i);
-    delay(1000);
+void loop()
+{
+  bool currentButtonState = digitalRead(buttonPin);
+
+  if (lastButtonState == HIGH && currentButtonState == LOW)
+  {
+    counter++;
+    if(counter > 15) counter = 0;
+
+    displayDigit(counter); 
+
+    delay(200); 
   }
+
+  lastButtonState = currentButtonState;
 }
 
 ```
@@ -77,59 +109,73 @@ Mengaktifkan resistor internal Arduino untuk menjaga pin tetap **HIGH** saat tom
 
 ```cpp
 #include <Arduino.h>
+const int segmentPins[8] = {7, 6, 5, 11, 10, 8, 9, 4};
 
-const int segmentPins[8] = {7, 6, 5, 11, 10, 8, 9, 4}; // Pin Seven Segment
-const int btnUp   = 2;                                // Tombol Tambah (Increment)
-const int btnDown = 3;                                // Tombol Kurang (Decrement)
+const int buttonUp = 3;   
+const int buttonDown = 2; 
+int counter = 0;
+
+bool lastUpState = HIGH;
+bool lastDownState = HIGH;
 
 byte digitPattern[16][8] = {
-  {1,1,1,1,1,1,0,0}, {0,1,1,0,0,0,0,0}, {1,1,0,1,1,0,1,0}, {1,1,1,1,0,0,1,0},
-  {0,1,1,0,0,1,1,0}, {1,0,1,1,0,1,1,0}, {1,0,1,1,1,1,1,0}, {1,1,1,0,0,0,0,0},
-  {1,1,1,1,1,1,1,0}, {1,1,1,1,0,1,1,0}, {1,1,1,0,1,1,1,0}, {0,0,1,1,1,1,1,0},
-  {1,0,0,1,1,1,0,0}, {0,1,1,1,1,0,1,0}, {1,0,0,1,1,1,1,0}, {1,0,0,0,1,1,1,0}
+  {1,1,1,1,1,1,0,0}, //0
+  {0,1,1,0,0,0,0,0}, //1
+  {1,1,0,1,1,0,1,0}, //2
+  {1,1,1,1,0,0,1,0}, //3
+  {0,1,1,0,0,1,1,0}, //4
+  {1,0,1,1,0,1,1,0}, //5 
+  {1,0,1,1,1,1,1,0}, //6
+  {1,1,1,0,0,0,0,0}, //7
+  {1,1,1,1,1,1,1,0}, //8
+  {1,1,1,1,0,1,1,0}, //9
+  {1,1,1,0,1,1,1,0}, //A
+  {0,0,1,1,1,1,1,0}, //b
+  {1,0,0,1,1,1,0,0}, //C
+  {0,1,1,1,1,0,1,0}, //d
+  {1,0,0,1,1,1,1,0}, //E
+  {1,0,0,0,1,1,1,0}  //F
 };
 
-int currentDigit   = 0;    // Menyimpan nilai hitungan aktif
-bool lastUpState   = HIGH; // Status tombol Up sebelumnya
-bool lastDownState = HIGH; // Status tombol Down sebelumnya
-
 void displayDigit(int num) {
-  for (int i = 0; i < 8; i++) {
-    digitalWrite(segmentPins[i], digitPattern[num][i]);
+  for(int i=0; i<8; i++) {
+    digitalWrite(segmentPins[i], !digitPattern[num][i]);
   }
 }
 
 void setup() {
-  for (int i = 0; i < 8; i++) pinMode(segmentPins[i], OUTPUT);
-  pinMode(btnUp, INPUT_PULLUP);
-  pinMode(btnDown, INPUT_PULLUP);
-  displayDigit(currentDigit); // Tampilan awal angka 0
+  for(int i=0; i<8; i++) {
+    pinMode(segmentPins[i], OUTPUT);
+  }
+
+  pinMode(buttonUp, INPUT_PULLUP);
+  pinMode(buttonDown, INPUT_PULLUP);
+
+  displayDigit(counter);
 }
 
 void loop() {
-  bool upState   = digitalRead(btnUp);   // Baca tombol tambah
-  bool downState = digitalRead(btnDown); // Baca tombol kurang
+  bool currentUpState = digitalRead(buttonUp);
+  bool currentDownState = digitalRead(buttonDown);
 
-  // Deteksi pencetan tombol Up (Transisi HIGH ke LOW)
-  if (lastUpState == HIGH && upState == LOW) {
-    currentDigit++;
-    if (currentDigit > 15) currentDigit = 0; // Kembali ke 0 jika lewat dari F
-    displayDigit(currentDigit);
-    delay(50); // Debounce singkat
+
+  if (lastUpState == HIGH && currentUpState == LOW) {
+    counter++;
+    if(counter > 15) counter = 0; 
+    displayDigit(counter);
+    delay(200); 
   }
 
-  // Deteksi pencetan tombol Down (Transisi HIGH ke LOW)
-  if (lastDownState == HIGH && downState == LOW) {
-    currentDigit--;
-    if (currentDigit < 0) currentDigit = 15; // Kembali ke F jika kurang dari 0
-    displayDigit(currentDigit);
-    delay(50); // Debounce singkat
+  if (lastDownState == HIGH && currentDownState == LOW) {
+    counter--;
+    if(counter < 0) counter = 15; 
+    displayDigit(counter);
+    delay(200); 
   }
 
-  lastUpState   = upState;
-  lastDownState = downState;
+  lastUpState = currentUpState;
+  lastDownState = currentDownState;
 }
-
 ```
 
 ---
