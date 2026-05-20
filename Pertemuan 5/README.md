@@ -9,9 +9,6 @@
 
 
 # Modul 5: Multitasking dan Komunikasi Antar-Task dalam FreeRTOS
-
-Repository ini berisi dokumentasi laporan praktikum, analisis sistem, serta modifikasi program untuk **Modul 5: Multitasking -- Komunikasi Task** menggunakan FreeRTOS pada platform Arduino. Fokus utama dari modul ini adalah memahami penjadwalan task (task scheduling), manajemen konkurensi, pencegahan *race condition*, serta mekanisme pertukaran data yang aman melalui *Message Queue*.
-
 ---
 
 ## 📌 Daftar Isi
